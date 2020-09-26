@@ -11,6 +11,7 @@
     <h2>Manage ${label_singular}</h2>
 
       <form class="mod" id="modenum" method="post" action="">
+      ${jmacros.form_token_input()}
         <fieldset>
           <legend>Modify ${label_singular}</legend>
           <div class="field">
@@ -24,6 +25,7 @@
       </form>
 
         <form class="addnew" id="addenum" method="post" action="">
+        ${jmacros.form_token_input()}
           <fieldset>
             <legend>Add ${label_singular}</legend>
             <div class="field">
@@ -37,10 +39,7 @@
 
         {% if enums is defined %}
           <form id="enumtable" method="post" action="">
-            <!--<div class="placeholder">
-              <input type="checkbox" name="blank_placeholder"/>
-              Display blank placeholder as the first option
-            </div>-->
+          ${jmacros.form_token_input()}
             <table class="listing" id="enumlist">
               <thead>
                 <tr>
@@ -85,7 +84,6 @@
             always be a blank placeholder value when the list is empty.
           </p>
         {% endif %}
-
     {% endblock adminpanel %}
   </body>
 

@@ -59,7 +59,7 @@ class CustomSelectPanel(Component):
     def get_admin_panels(self, req):
         if req.perm.has_permission('TRAC_ADMIN'):
             for field in self._get_custom_fields():
-                yield ('ticket', 'Ticket System',
+                yield ('custom-select', 'Custom Select',
                        field[1].replace(' ', '').lower(),
                        field[1])
 
