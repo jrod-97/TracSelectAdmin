@@ -1,6 +1,16 @@
 Change History
 ==============
+New TracSelectAdmin
+------------------------------------------------------------
+0.1.0(2020-09-26)
+-----------------
+ * Convert html template to jinja2
+ * Cleanup code in admin.py for easier reading and less bugs
+ * Remove "panel" option from plugin
 
+
+-------------------------------------------------------------
+Old CustomSelectAdmin Versions
 0.6.1(2011-03-03)
 -----------------
  * Use MANIFEST.in in the absence of a Subversion repository
