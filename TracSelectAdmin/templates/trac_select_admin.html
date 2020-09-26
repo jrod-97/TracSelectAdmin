@@ -1,0 +1,90 @@
+{% extends "admin.html" %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>${label_singular}</title>
+  </head>
+
+  <body>
+    {% block adminpanel %}
+    <h2>Manage ${label_singular}</h2>
+
+      <form class="mod" id="modenum" method="post" action="">
+      ${jmacros.form_token_input()}
+        <fieldset>
+          <legend>Modify ${label_singular}</legend>
+          <div class="field">
+            <label>Name: <input type="text" name="name" value="${enum}" /></label>
+          </div>
+          <div class="buttons">
+            <input type="submit" name="cancel" value="Cancel"/>
+            <input type="submit" name="save" value="Save"/>
+          </div>
+        </fieldset>
+      </form>
+
+        <form class="addnew" id="addenum" method="post" action="">
+        ${jmacros.form_token_input()}
+          <fieldset>
+            <legend>Add ${label_singular}</legend>
+            <div class="field">
+              <label>Name:<input type="text" name="name" id="name"/></label>
+            </div>
+            <div class="button">
+              <input type="submit" name="add" value="Add"/>
+            </div>
+          </fieldset>
+        </form>
+
+        {% if enums is defined %}
+          <form id="enumtable" method="post" action="">
+          ${jmacros.form_token_input()}
+            <table class="listing" id="enumlist">
+              <thead>
+                <tr>
+                    <th class="sel"></th>
+                    <th>Name</th>
+                    <th>Default</th>
+                    <th>Order</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for enum in enums %}
+                <tr>
+                  <td><input type="checkbox" name="sel" value="${enum}" /></td>
+                  <td>${enum}</td>
+                  <td class="default">
+                    <input type="radio" name="default" value="${enum}" {% if enum == default %} checked="checked" {% endif %} />
+                  </td>
+                  <td class="default">
+                    <select name="value_${enum}">
+                        {% for i in range(len(enums)) %}
+                            <option {% if i==enums.index(enum) %} selected="selected" {% endif %}>${i}</option>
+                        {% endfor %}
+                    </select>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+            <div class="buttons">
+              <input type="submit" name="remove" value="Remove selected items" />
+              <input type="submit" name="apply" value="Apply changes" />
+            </div>
+            <p class="help">
+              This field cannot be hidden by deleting all the values in it. To remove this field, 
+              delete the entry from trac.ini in the [ticket-custom] section.
+            </p>
+          </form>
+        {% else %}
+          <p class="help">
+            This field cannot be hidden by deleting all the values in it. To remove this field, 
+            delete the entry from trac.ini in the [ticket-custom] section. For this reason, there will
+            always be a blank placeholder value when the list is empty.
+          </p>
+        {% endif %}
+    {% endblock adminpanel %}
+  </body>
+
+</html>
